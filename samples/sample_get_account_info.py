@@ -5,7 +5,7 @@ import sys
 # The following line is required because the swagger_client is in the sibling directory.
 # We may remove the line if we choose to put it inside the samples directory.
 # Also, we may not need it if we directly publish the client to pypi and use that instead.
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath('../../evapi-docs-python/'))
 
 from dotenv import load_dotenv
 from swagger_client.api.account_api import AccountApi

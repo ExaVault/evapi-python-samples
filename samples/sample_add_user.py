@@ -68,7 +68,7 @@ if __name__ == "__main__":
         # The UsersApi::addUser method returns a .Swagger.Client.Model.UserResponse object
         # See https://www.exavault.com/developer/api-docs/#operation/addUser for the response body schema
         user_id = result.data.id
-        print("Created new user {} as ID".format(new_username, user_id))
+        print("Created new user {} as ID #{}".format(new_username, user_id))
 
     except Exception as e:
         print('Exception when calling UsersApi.addUser:', str(e))

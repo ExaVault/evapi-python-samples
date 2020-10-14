@@ -58,10 +58,10 @@ if __name__ == "__main__":
         print('Exception when calling UserApi.listUsers:', str(e))
         sys.exit(1)
 
-
     # If we got this far without the program ending, our call to listUsers succeeded and returned something
     # The call returns a .Swagger.Client.Model.UserCollectionResponse object
-    # See https://www.exavault.com/developer/api-docs/#operation/listUsers for the details of the response object
+    # See https://www.exavault.com/developer/api-docs/#operation/listUsers for
+    # the details of the response object
 
     total_users_for_account = list_result.total_results
     total_users_retrieved = list_result.returned_results
@@ -75,14 +75,32 @@ if __name__ == "__main__":
     # This opens the file for writing (which removes existing data) and gives us a file handle that we
     # can use to write the CSV data with
     output_filename = os.path.join(os.path.dirname(__file__), "files/users_listing.csv")
-    with open (output_filename, 'w') as f:
+    with open(output_filename, 'w') as f:
 
         # Writing the column titles to our CSV file
         csv_column_headers = [
-            'Id', 'Username', 'Nickname','Email Address','Home Folder','Role','Time Zone',
-            'Download','Upload','Modify','Delete','List','Change Password','Share','Notification',
-            'View Form Data','Delete Form Data','Expiration','Last Logged In','locked','Created','Modified'
-        ]
+            'Id',
+            'Username',
+            'Nickname',
+            'Email Address',
+            'Home Folder',
+            'Role',
+            'Time Zone',
+            'Download',
+            'Upload',
+            'Modify',
+            'Delete',
+            'List',
+            'Change Password',
+            'Share',
+            'Notification',
+            'View Form Data',
+            'Delete Form Data',
+            'Expiration',
+            'Last Logged In',
+            'locked',
+            'Created',
+            'Modified']
         f.write(','.join(csv_column_headers) + '\n')
 
         # Looping over the users array that we got back from our listUsers call.
@@ -94,18 +112,18 @@ if __name__ == "__main__":
 
             # The detailed data about the individual user is accessed through the User::getAttributes method
             # which returns a .Swagger.Client.Model.UserAttributes object
-            
-            username           = user.attributes.username
-            nickname           = user.attributes.nickname
-            email              = user.attributes.email
-            home_dir           = user.attributes.home_dir
-            role               = user.attributes.role
-            time_zone          = user.attributes.time_zone
-            created            = user.attributes.created
-            modified           = user.attributes.modified
-            access_timestamp   = user.attributes.access_timestamp
-            expiration         = user.attributes.expiration if user.attributes.expiration else ''
-            locked             = '' if user.attributes.status else 'locked'
+
+            username = user.attributes.username
+            nickname = user.attributes.nickname
+            email = user.attributes.email
+            home_dir = user.attributes.home_dir
+            role = user.attributes.role
+            time_zone = user.attributes.time_zone
+            created = user.attributes.created
+            modified = user.attributes.modified
+            access_timestamp = user.attributes.access_timestamp
+            expiration = user.attributes.expiration if user.attributes.expiration else ''
+            locked = '' if user.attributes.status else 'locked'
 
             # The access timestamp returns a non-standard value representing 'never'
             last_logged_in = 'never' if access_timestamp[:4] == "0000" else access_timestamp
@@ -125,11 +143,31 @@ if __name__ == "__main__":
             view_form_data = 'view_form_data' if user.attributes.permissions.view_form_data else ''
             delete_form_data = 'delete_form_data' if user.attributes.permissions.delete_form_data else ''
 
-            # Make an array of the current user's data and append it to the list we will use to create our report
-            data = [id, username, nickname, email, home_dir, role, time_zone, download, upload, modify, delete,
-                    list_permission, change_password, share, notification, view_form_data, delete_form_data,
-                    expiration, last_logged_in, locked, created, modified
-                    ]
+            # Make an array of the current user's data and append it to the list we
+            # will use to create our report
+            data = [
+                id,
+                username,
+                nickname,
+                email,
+                home_dir,
+                role,
+                time_zone,
+                download,
+                upload,
+                modify,
+                delete,
+                list_permission,
+                change_password,
+                share,
+                notification,
+                view_form_data,
+                delete_form_data,
+                expiration,
+                last_logged_in,
+                locked,
+                created,
+                modified]
             f.write(','.join(map(str, data)) + '\n')
 
     print("Listed: {} users to {}".format(total_users_retrieved, output_filename))

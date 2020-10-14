@@ -5,7 +5,7 @@ import sys
 from dotenv import load_dotenv
 from swagger_client.api.resources_api import ResourcesApi
 
-#TODO: download_api not found
+# TODO: download_api not found
 
 ##
 # sample_download_csv_files.py - Use the ResourcesApi to download all of the CSV files found within a folder tree
@@ -13,22 +13,22 @@ from swagger_client.api.resources_api import ResourcesApi
 
 
 ##
- # To use this script, add your credentials to a file named .env which is located in the same directory as this script
- # 
- # Your API key will be the EV_KEY
- # Your access token will be EV_TOKEN
- # Your account URL will be the address you should use for the API endpoint
- # 
- # To obtain your API Key and Token, you'll need to use the Developer page within the web file manager
- # See https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token
- # 
- # Access tokens do not expire, so you should only need to obtain the key and token once.
- # 
- # Your account URL is determined by the name of your account. 
- # The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
- #   account name
- # See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
- ##
+# To use this script, add your credentials to a file named .env which is located in the same directory as this script
+#
+# Your API key will be the EV_KEY
+# Your access token will be EV_TOKEN
+# Your account URL will be the address you should use for the API endpoint
+#
+# To obtain your API Key and Token, you'll need to use the Developer page within the web file manager
+# See https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token
+#
+# Access tokens do not expire, so you should only need to obtain the key and token once.
+#
+# Your account URL is determined by the name of your account.
+# The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
+#   account name
+# See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
+##
 
 load_dotenv()
 API_KEY = os.getenv('EV_KEY')
@@ -36,10 +36,12 @@ ACCESS_TOKEN = os.getenv('EV_TOKEN')
 ACCOUNT_URL = os.getenv('ACCOUNT_URL')
 
 if __name__ == "__main__":
-    # We are demonstrating the use of the ResourcesApi, which can be used to manage files and folders in your account
+    # We are demonstrating the use of the ResourcesApi, which can be used to
+    # manage files and folders in your account
 
     # We have to override the default configuration of the API object with an updated host URL so that our code
-    #  will reach the correct URL for the api. We have to override this setting for each of the API classes we use
+    # will reach the correct URL for the api. We have to override this setting
+    # for each of the API classes we use
     resources_api = ResourcesApi()
     resources_api.api_client.configuration.host = ACCOUNT_URL
 
@@ -69,7 +71,6 @@ if __name__ == "__main__":
         print('Exception when calling Api:', str(e))
         sys.exit(1)
 
-
     # If we got this far, there are files for us to download
     # We are going to save the IDs of all the files we want to download into an array
     downloads = []
@@ -84,14 +85,14 @@ if __name__ == "__main__":
         ##*************************************************************************************##
         ## note - this is an unusual workaround required by the auto-generated py cl_ient sdk *##
         ##*************************************************************************************##
-        ## ideally, we would use the resources_api for all resources calls, but due to a bug in
-         # the library that creates the ResourcesApi, you cannot download multiple files at once
-         # using that API. Instead, use the DownloadApi download methods which has the same parameters and
-         # output as the ResourcesApi See https://www.exavault.com/developer/api-docs/#operation/download
+        # ideally, we would use the resources_api for all resources calls, but due to a bug in
+        # the library that creates the ResourcesApi, you cannot download multiple files at once
+        # using that API. Instead, use the DownloadApi download methods which has the same parameters and
+        # output as the ResourcesApi See https://www.exavault.com/developer/api-docs/#operation/download
         ##
         ##*********************************************************************************##
 
-        #TODO: Looks like this API is returning non-ASCII response
+        # TODO: Looks like this API is returning non-ASCII response
         result = resources_api.download(API_KEY, ACCESS_TOKEN, downloads)
 
         # The body of the result is the binary content of our file(s),
@@ -100,16 +101,15 @@ if __name__ == "__main__":
         if len(downloads) > 1:
             download_file = os.path.join(os.path.dirname(__file__), "files/download.zip")
         else:
-            download_file = os.path.join(
-                os.path.dirname(__file__), "files/download-{}.csv".format(datetime.datetime.today().strftime("%s")))
+            download_file = os.path.join(os.path.dirname(__file__),
+                                         "files/download-{}.csv".format(datetime.datetime.today().strftime("%s")))
 
         with open(download_file, 'w') as f:
             f.write(result)
 
-
         print("File(s) downloaded to", download_file)
 
     except Exception as e:
+        raise e
         print('Exception when calling Api:', str(e))
         sys.exit(1)
-

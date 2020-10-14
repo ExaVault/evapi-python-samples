@@ -11,21 +11,21 @@ from swagger_client.api.users_api import UsersApi
 
 
 ##
- # To use this script, add your credentials to a file named .env which is located in the same directory as this script
- #
- # Your API key will be the EV_KEY
- # Your access token will be EV_TOKEN
- # Your account URL will be the address you should use for the API endpoint
- #
- # To obtain your API Key and Token, you'll need to use the Developer page within the web file manager
- # See https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token
- #
- # Access tokens do not expire, so you should only need to obtain the key and token once.
- #
- # Your account URL is determined by the name of your account.
- # The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
- #   account name
- # See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
+# To use this script, add your credentials to a file named .env which is located in the same directory as this script
+#
+# Your API key will be the EV_KEY
+# Your access token will be EV_TOKEN
+# Your account URL will be the address you should use for the API endpoint
+#
+# To obtain your API Key and Token, you'll need to use the Developer page within the web file manager
+# See https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token
+#
+# Access tokens do not expire, so you should only need to obtain the key and token once.
+#
+# Your account URL is determined by the name of your account.
+# The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
+#   account name
+# See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
 ##
 
 load_dotenv()

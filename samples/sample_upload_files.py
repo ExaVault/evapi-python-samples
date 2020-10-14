@@ -7,27 +7,27 @@ from swagger_client.api.resources_api import ResourcesApi
 
 
 ##
- # sample_upload_files.py - Use the ResourcesApi to upload a file to your account
- ##
+# sample_upload_files.py - Use the ResourcesApi to upload a file to your account
+##
 
 
 ##
- # To use this script, add your credentials to a file named .env which is located in the same directory as this script
- # 
- # Your API key will be the EV_KEY
- # Your access token will be EV_TOKEN
- # Your account URL will be the address you should use for the API endpoint
- # 
- # To obtain your API Key and Token, you'll need to use the Developer page within the web file manager
- # See https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token
- # 
- # Access tokens do not expire, so you should only need to obtain the key and token once.
- # 
- # Your account URL is determined by the name of your account. 
- # The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
- #   account name
- # See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
- ##
+# To use this script, add your credentials to a file named .env which is located in the same directory as this script
+#
+# Your API key will be the EV_KEY
+# Your access token will be EV_TOKEN
+# Your account URL will be the address you should use for the API endpoint
+#
+# To obtain your API Key and Token, you'll need to use the Developer page within the web file manager
+# See https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token
+#
+# Access tokens do not expire, so you should only need to obtain the key and token once.
+#
+# Your account URL is determined by the name of your account.
+# The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
+#   account name
+# See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
+##
 
 load_dotenv()
 API_KEY = os.getenv('EV_KEY')
@@ -36,7 +36,8 @@ ACCOUNT_URL = os.getenv('ACCOUNT_URL')
 
 if __name__ == "__main__":
 
-    # We are demonstrating the use of the ResourcesApi, which can be used to manage files and folders in your account
+    # We are demonstrating the use of the ResourcesApi, which can be used to
+    # manage files and folders in your account
 
     # For this demo, we'll upload a file found in the same folder as this sample code.
     #
@@ -44,7 +45,8 @@ if __name__ == "__main__":
     # There are parameters to control whether files can be overwritten by repeated uploads
     #
     # We have to override the default configuration of the API object with an updated host URL so that our code
-    #  will reach the correct URL for the api. We have to override this setting for each of the API classes we use
+    # will reach the correct URL for the api. We have to override this setting
+    # for each of the API classes we use
     resources_api = ResourcesApi()
     resources_api.api_client.configuration.host = ACCOUNT_URL
 
@@ -63,14 +65,18 @@ if __name__ == "__main__":
         result = resources_api.upload_file(API_KEY, ACCESS_TOKEN, target_filename, target_size, file=filename)
 
         # The uploadFile method of the ResourcesApi returns a .Swagger.Client.Model.ResourceResponse object
-        # See https://www.exavault.com/developer/api-docs/#operation/uploadFile for the details of the response object
+        # See https://www.exavault.com/developer/api-docs/#operation/uploadFile
+        # for the details of the response object
 
         # Verify that the uploaded file's reported size matches what we expected.
         # The getAttributes method of the ResourceResponse object will let us get the details of the file
         size_uploaded = result.data.attributes.size
 
         if size_uploaded != target_size:
-            print("Uploaded file does not match expected size. Should be ##target_filename but is ##size_uploaded".format(target_size, size_uploaded))
+            print(
+                "Uploaded file does not match expected size. Should be ##target_filename but is ##size_uploaded".format(
+                    target_size,
+                    size_uploaded))
             sys.exit(3)
 
         # Success!

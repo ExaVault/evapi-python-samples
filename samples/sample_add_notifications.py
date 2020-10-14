@@ -32,10 +32,10 @@ API_KEY = os.getenv('EV_KEY')
 ACCESS_TOKEN = os.getenv('EV_TOKEN')
 ACCOUNT_URL = os.getenv('ACCOUNT_URL')
 
-# We are demonstrating the use of the NotificationsApi, which can be used to manage notification settings 
+# We are demonstrating the use of the NotificationsApi, which can be used to manage notification settings
 #  for files and folders
 
-# For this demo, we'll create a new folder tree and add notifications to those new folders. If you have 
+# For this demo, we'll create a new folder tree and add notifications to those new folders. If you have
 # an existing file or folder that you want to create a notification for, you won't need the step where
 # we use the ResourcesApi to create the folders first.
 #
@@ -43,20 +43,22 @@ ACCOUNT_URL = os.getenv('ACCOUNT_URL')
 #  will reach the correct URL for the api. We have to override this setting for each of the API classes we use
 
 if __name__ == "__main__":
-    # We are demonstrating the use of the NotificationsApi, which can be used to manage notification settings 
+    # We are demonstrating the use of the NotificationsApi, which can be used to manage notification settings
     #  for files and folders
 
-    # For this demo, we'll create a new folder tree and add notifications to those new folders. If you have 
+    # For this demo, we'll create a new folder tree and add notifications to those new folders. If you have
     # an existing file or folder that you want to create a notification for, you won't need the step where
     # we use the ResourcesApi to create the folders first.
-    # 
+    #
     # We have to override the default configuration of the API object with an updated host URL so that our code
-    #  will reach the correct URL for the api. We have to override this setting for each of the API classes we use
+    # will reach the correct URL for the api. We have to override this setting
+    # for each of the API classes we use
     resources_api = ResourcesApi()
     resources_api.api_client.configuration.host = ACCOUNT_URL
 
     try:
-        # We will create a new folder tree for the demo. The top-level folder will have a different name each time you run this script
+        # We will create a new folder tree for the demo. The top-level folder will
+        # have a different name each time you run this script
         parent_folder = "sample_notifications_{}".format(datetime.datetime.today().strftime("%s"))
 
         # We can actually be sneaky and add missing parent folders by passing a multi-level path
@@ -73,7 +75,8 @@ if __name__ == "__main__":
         result = resources_api.add_folder(API_KEY, ACCESS_TOKEN, body=request_body)
 
         # The add_folder method of the ResourcesApi returns a swagger_client.model.ResourceResponse object
-        # See https://www.exavault.com/developer/api-docs/#operation/addFolder for the details of the response object
+        # See https://www.exavault.com/developer/api-docs/#operation/addFolder for
+        # the details of the response object
 
         print("Created new folder {}".format(result.data.attributes.path))
 
@@ -81,7 +84,8 @@ if __name__ == "__main__":
         request_body = {'path': download_folder}
         result = resources_api.add_folder(API_KEY, ACCESS_TOKEN, body=request_body)
         # The addFolder method of the ResourcesApi returns a swagger_client.model.ResourceResponse object
-        # See https://www.exavault.com/developer/api-docs/#operation/addFolder for the details of the response object
+        # See https://www.exavault.com/developer/api-docs/#operation/addFolder for
+        # the details of the response object
         print("Created new folder {}".format(result.data.attributes.path))
 
     except Exception as e:
@@ -118,7 +122,7 @@ if __name__ == "__main__":
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = notifications_api.add_notification(API_KEY, ACCESS_TOKEN, body=request_body)
-        print("Created download notification for {}".format(download_folder)) 
+        print("Created download notification for {}".format(download_folder))
 
         # - Next we will add a notification that will send a message to several addresses when a user uploads
         #   into our uploads folder.

@@ -41,11 +41,13 @@ if __name__ == "__main__":
     # a new zip file in the folder
 
     # We have to override the default configuration of the API object with an updated host URL so that our code
-    #  will reach the correct URL for the api. We have to override this setting for each of the API classes we use
+    # will reach the correct URL for the api. We have to override this setting
+    # for each of the API classes we use
     resources_api = ResourcesApi()
     resources_api.api_client.configuration.host = ACCOUNT_URL
 
-    # We will create a new folder tree for the demo. The top-level folder will have a different name each time you run this script
+    # We will create a new folder tree for the demo. The top-level folder will
+    # have a different name each time you run this script
     parent_folder = "sample_compress_{}".format(datetime.datetime.today().strftime("%s"))
 
     # We are uploading a sample file provided along with this script.
@@ -54,18 +56,21 @@ if __name__ == "__main__":
 
     target_size = os.path.getsize(filename)
 
-    # We'll store the IDs, which we'll grab from the responses from new resource uploads, that we want to compress
+    # We'll store the IDs, which we'll grab from the responses from new
+    # resource uploads, that we want to compress
     compress_resources = []
 
     for i in range(6):
-        # We're  uploading the same file under different names to make sure we have multiple files in our target folder
+        # We're  uploading the same file under different names to make sure we
+        # have multiple files in our target folder
         target_filename = "/{}/quick start {}.pdf".format(parent_folder, i)
         try:
 
             # The uploadFile method of the ResourcesApi class will let us upload a file to our account
             # See https://www.exavault.com/developer/api-docs/#operation/uploadFile for the details of this method
             #
-            result = resources_api.upload_file(API_KEY, ACCESS_TOKEN, target_filename, target_size, file=filename)
+            result = resources_api.upload_file(
+                API_KEY, ACCESS_TOKEN, target_filename, target_size, file=filename)
 
             # We want to make an archive that contains the files we've uploaded
             # The ResourcesApi::uploadFile method returns a .Swagger.Client.Model.ResourceResponse object

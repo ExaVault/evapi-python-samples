@@ -1,4 +1,6 @@
 from __future__ import division
+from swagger_client.api.account_api import AccountApi
+from dotenv import load_dotenv
 import os
 import sys
 
@@ -7,8 +9,6 @@ import sys
 # Also, we may not need it if we directly publish the client to pypi and use that instead.
 sys.path.append(os.path.abspath('../../evapi-docs-python/'))
 
-from dotenv import load_dotenv
-from swagger_client.api.account_api import AccountApi
 
 ##
 # sample_get_account.py
@@ -48,7 +48,8 @@ if __name__ == "__main__":
     try:
         # The getAccount method of the AccountApi class will give us access to the current status of our account
         # See https://www.exavault.com/developer/api-docs/#operation/getAccount for the details of this method
-        # We must pass in our API Key and Access Token with every call, which we retrieved from the .env file above
+        # We must pass in our API Key and Access Token with every call, which we
+        # retrieved from the .env file above
         result = api.get_account(API_KEY, ACCESS_TOKEN)
     except Exception as e:
         # If there was a problem, such as our credentials not being correct, or the URL not working,
@@ -67,5 +68,5 @@ if __name__ == "__main__":
     account_current_size = quota.disk_used / (1024 ** 3)
 
     print('Account used: {:.1f} GB ({:.1f}%)'.format(
-        account_current_size, account_current_size/account_max_size * 100))
+        account_current_size, account_current_size / account_max_size * 100))
     print('Total size: {:.1f} GB'.format(account_max_size))

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from swagger_client.api.users_api import UsersApi
 
 ##
-# sample_add_user.py - Use the UsersApi to create a  user with a home directory
+# sample_add_user.py - Use the UsersApi to create a new user with a home directory
 ##
 
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     users_api.api_client.configuration.host = ACCOUNT_URL
 
     try:
-        # API methods that take a JSON body, such as the addUser method, require us to submit an object with the
+        # API methods that take a JSON body, such as the add_user method, require us to submit an object with the
         # parameters we want to send to the API.
         # See https://www.exavault.com/developer/api-docs/#operation/addUser for the request body schema
         #
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = users_api.add_user(API_KEY, ACCESS_TOKEN, body=request_body)
 
-        # The UsersApi::addUser method returns a .Swagger.Client.Model.UserResponse object
+        # The UsersApi::addUser method returns a swagger_client.model.UserResponse object
         # See https://www.exavault.com/developer/api-docs/#operation/addUser for the response body schema
         user_id = result.data.id
         print("Created new user {} as ID #{}".format(new_username, user_id))

@@ -8,7 +8,8 @@ from swagger_client.api.resources_api import ResourcesApi
 # TODO: download_api not found
 
 ##
-# sample_download_csv_files.py - Use the ResourcesApi to download all of the CSV files found within a folder tree
+# sample_download_csv_files.py
+# Use the ResourcesApi to download all of the CSV files found within a folder tree
 ##
 
 
@@ -26,7 +27,7 @@ from swagger_client.api.resources_api import ResourcesApi
 #
 # Your account URL is determined by the name of your account.
 # The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
-#   account name
+# account name.
 # See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
 ##
 
@@ -37,11 +38,10 @@ ACCOUNT_URL = os.getenv('ACCOUNT_URL')
 
 if __name__ == "__main__":
     # We are demonstrating the use of the ResourcesApi, which can be used to
-    # manage files and folders in your account
+    # manage files and folders in your account.
 
     # We have to override the default configuration of the API object with an updated host URL so that our code
-    # will reach the correct URL for the api. We have to override this setting
-    # for each of the API classes we use
+    # will reach the correct URL for the api. We have to override this setting for each of the API classes we use.
     resources_api = ResourcesApi()
     resources_api.api_client.configuration.host = ACCOUNT_URL
 
@@ -56,10 +56,10 @@ if __name__ == "__main__":
         list_result = resources_api.list_resources(
             API_KEY, ACCESS_TOKEN, "/Sample Files and Folders", offset=0, type='file', name='*.csv')
 
-        # The ResourcesApi::listResources method returns a .Swagger.Client.Model.ResourceCollectionResponse object
+        # The ResourcesApi.list_resources attribute returns a swagger_client.model.ResourceCollectionResponse object
         # See https://www.exavault.com/developer/api-docs/#operation/listResources for the response schema
 
-        # The ResourceCollectionResponse::getReturnedResults method will indicate how many matching files are included
+        # The ResourceCollectionResponse.returned_results attribute will indicate how many matching files are included
         # in this response. If we didn't find any matches, there's nothing else to do
         if list_result.returned_results == 0:
             print("Found no files to download")
@@ -68,6 +68,7 @@ if __name__ == "__main__":
             print("Found {} CSV files to download".format(list_result.returned_results))
 
     except Exception as e:
+        raise e
         print('Exception when calling Api:', str(e))
         sys.exit(1)
 
@@ -81,35 +82,24 @@ if __name__ == "__main__":
 
     try:
         # Now that we used the ResourcesApi to gather all of the IDs of the resources that
-        # matched our search, we will use the DownloadApi to download multiple files
-        ##*************************************************************************************##
-        ## note - this is an unusual workaround required by the auto-generated py cl_ient sdk *##
-        ##*************************************************************************************##
-        # ideally, we would use the resources_api for all resources calls, but due to a bug in
-        # the library that creates the ResourcesApi, you cannot download multiple files at once
-        # using that API. Instead, use the DownloadApi download methods which has the same parameters and
-        # output as the ResourcesApi See https://www.exavault.com/developer/api-docs/#operation/download
-        ##
-        ##*********************************************************************************##
+        # matched our search, we will use the ResourceApi.download method to download multiple files.
 
-        # TODO: Looks like this API is returning non-ASCII response
         result = resources_api.download(API_KEY, ACCESS_TOKEN, downloads)
 
         # The body of the result is the binary content of our file(s),
         # We write that content into a single file, named with .zip if there were multiple files
-        # downloaded or just named .csv if not (since we were storing csvs)
+        # downloaded or just named .csv if not (since we were storing CSVs)
         if len(downloads) > 1:
             download_file = os.path.join(os.path.dirname(__file__), "files/download.zip")
         else:
             download_file = os.path.join(os.path.dirname(__file__),
                                          "files/download-{}.csv".format(datetime.datetime.today().strftime("%s")))
 
-        with open(download_file, 'w') as f:
+        with open(download_file, 'wb') as f:
             f.write(result)
 
         print("File(s) downloaded to", download_file)
 
     except Exception as e:
-        raise e
         print('Exception when calling Api:', str(e))
         sys.exit(1)

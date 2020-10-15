@@ -22,7 +22,7 @@ from swagger_client.api.users_api import UsersApi
 #
 # Your account URL is determined by the name of your account.
 # The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
-#   account name
+# account name.
 # See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
 ##
 
@@ -58,22 +58,22 @@ if __name__ == "__main__":
         print('Exception when calling UserApi.listUsers:', str(e))
         sys.exit(1)
 
-    # If we got this far without the program ending, our call to listUsers succeeded and returned something
-    # The call returns a .Swagger.Client.Model.UserCollectionResponse object
+    # If we got this far without the program ending, our call to list_users succeeded and returned something
+    # The call returns a swagger_client.model.UserCollectionResponse object
     # See https://www.exavault.com/developer/api-docs/#operation/listUsers for
     # the details of the response object
 
     total_users_for_account = list_result.total_results
     total_users_retrieved = list_result.returned_results
 
-    # The returned users will be an array of .Swagger.Client.Model.User objects which we can access from the
-    #   UserCollectionResponse::getData method
+    # The returned users will be an array of wagger_client.model.User objects which we can access from the
+    # UserCollectionResponse.data attribute
     users_retrieved = list_result.data
 
     # We are creating a CSV file in the same directory as this script.
     #
     # This opens the file for writing (which removes existing data) and gives us a file handle that we
-    # can use to write the CSV data with
+    # can use to write the CSV data with.
     output_filename = os.path.join(os.path.dirname(__file__), "files/users_listing.csv")
     with open(output_filename, 'w') as f:
 
@@ -103,15 +103,15 @@ if __name__ == "__main__":
             'Modified']
         f.write(','.join(csv_column_headers) + '\n')
 
-        # Looping over the users array that we got back from our listUsers call.
+        # Looping over the users array that we got back from our list_users call.
         for user in users_retrieved:
 
             # The internal ID of a user isn't visible in the web file manager. It is used by the API to
             # access the user.
-            id = user.id
+            user_id = user.id
 
-            # The detailed data about the individual user is accessed through the User::getAttributes method
-            # which returns a .Swagger.Client.Model.UserAttributes object
+            # The detailed data about the individual user is accessed through the User.attributes attribute
+            # which returns a swagger_client.model.UserAttributes object
 
             username = user.attributes.username
             nickname = user.attributes.nickname
@@ -128,7 +128,7 @@ if __name__ == "__main__":
             # The access timestamp returns a non-standard value representing 'never'
             last_logged_in = 'never' if access_timestamp[:4] == "0000" else access_timestamp
 
-            # The UserAttributes::getPermissions method returns a .Swagger.Client.Model.UserPermissions object,
+            # The UserAttributes.permissions attribute returns a swagger_client.model.UserPermissions object,
             #   which contains the True/False flags for each of the permissions available to a user
             #   See https://www.exavault.com/docs/account/04-users/00-introduction#managing-user-roles-and-permissions
             #
@@ -146,7 +146,7 @@ if __name__ == "__main__":
             # Make an array of the current user's data and append it to the list we
             # will use to create our report
             data = [
-                id,
+                user_id,
                 username,
                 nickname,
                 email,

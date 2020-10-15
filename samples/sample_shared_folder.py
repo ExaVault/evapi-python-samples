@@ -55,14 +55,14 @@ if __name__ == "__main__":
         # different name each time you run this script
         folder_path = "/sample_share_{}".format(datetime.datetime.today().strftime("%s"))
 
-        # API methods that take a JSON body, such as the addFolder method, require us to submit an object with the
+        # API methods that take a JSON body, such as the add_folder method, require us to submit an object with the
         # parameters we want to send to the API. This call requires a single parameter path
         request_body = {'path': folder_path}
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = resources_api.add_folder(API_KEY, ACCESS_TOKEN, body=request_body)
 
-        # The addFolder method of the ResourcesApi returns a .Swagger.Client.Model.ResourceResponse object
+        # The addFolder method of the ResourcesApi returns a swagger_client.model.ResourceResponse object
         # See https://www.exavault.com/developer/api-docs/#operation/addFolder for
         # the details of the response object
         print("Created new folder {}".format(result.data.attributes.path))
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = shares_api.add_share(API_KEY, ACCESS_TOKEN, body=request_body)
 
-        # The SharesApi::addShare method returns a .Swagger.Client.Model.RegularShareResponse object
+        # The SharesApi::addShare method returns a swagger_client.model.RegularShareResponse object
         #  See https://www.exavault.com/developer/api-docs/#operation/addShare for the response schema
 
         print("Created shared folder {} for {}".format(result.data.attributes.hash, folder_path))

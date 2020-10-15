@@ -7,8 +7,8 @@ from swagger_client.api.activity_api import ActivityApi
 
 
 ##
-# sample_get_failed_logins.py - Use the ActivityApi to retrieve the list of users who had failed logins
-# in the last 24 hours.
+# sample_get_failed_logins.py
+# Use the ActivityApi to retrieve the list of users who had failed logins in the last 24 hours.
 ##
 
 
@@ -46,9 +46,7 @@ if __name__ == "__main__":
 
     try:
         # The getSessionLogs method of the ActivityApi class will give us access activity logs for our account
-        # See
-        # https://www.exavault.com/developer/api-docs/#operation/getSessionLogs
-        # for the details of this method
+        # See https://www.exavault.com/developer/api-docs/#operation/getSessionLogs for the details of this method.
 
         # We must pass in our API Key and Access Token with every call, which we retrieved from the .env file above
         # This method also supports filtering parameters to limit the results returned. Check the link to
@@ -69,26 +67,24 @@ if __name__ == "__main__":
         print('Exception when calling ActivityApi.getSessionLogs:', str(e))
         sys.exit(1)
 
-    # If we got this far without the program ending, our call to getSessionLogs succeeded and returned something
-    # The call returns a .Swagger.Client.Model.SessionActivityResponse object
-    # See
-    # https://www.exavault.com/developer/api-docs/#operation/getSessionLogs
-    # for the details of the response object
+    # If we got this far without the program ending, our call to getSessionLogs succeeded and returned something.
+    # The call returns a swagger_client.model.SessionActivityResponse object.
+    # See https://www.exavault.com/developer/api-docs/#operation/getSessionLogs for the details of the response object.
 
-    failed_logins = {}  # container to hold our info
+    failed_logins = {}  # dictionary to hold our info
 
-    # The returned activity will be an array of .Swagger.Client.Model.SessionActivityEntry objects, which we can access
-    #   from the SessionActivityResponse::getData method
+    # The returned activity will be an array of swagger_client.model.SessionActivityEntry objects, which we can access
+    # from the SessionActivityResponse.data attribute.
     activity_logs = list_result.data
 
-    # Loop over the returned items, which should include only "Connect"
-    # operations, per our filters to the getSessionLogs call
+    # Loop over the returned items, which should include only "Connect" operations, per our 
+    # filters to the get_session_logs call
     for activity in activity_logs:
         # Each SessionActivityEntry object has a getAttributes method that allows us to access the details for the
-        #   logged activity, which will be a .Swagger.Client.Model.SessionActivityEntryAttributes object
+        # logged activity, which will be a swagger_client.model.SessionActivityEntryAttributes object
 
         # The SessionActivityEntryAttributes object has accessors for username,
-        # client IP address, status, operation, etc
+        # client IP address, status, operation, etc.
         if activity.attributes.status == "failed":
             if failed_logins.get(activity.attributes.username):
                 failed_logins[activity.attributes.username] += 1

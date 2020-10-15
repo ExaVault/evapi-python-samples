@@ -1,13 +1,9 @@
 from __future__ import division
-from swagger_client.api.account_api import AccountApi
-from dotenv import load_dotenv
 import os
 import sys
 
-# The following line is required because the swagger_client is in the sibling directory.
-# We may remove the line if we choose to put it inside the samples directory.
-# Also, we may not need it if we directly publish the client to pypi and use that instead.
-sys.path.append(os.path.abspath('../../evapi-docs-python/'))
+from swagger_client.api.account_api import AccountApi
+from dotenv import load_dotenv
 
 
 ##
@@ -58,7 +54,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # If we got this far without the program ending, our call to getAccount succeeded and returned something
-    # The call returns a `swagger_client.models.account_response.AccountResponse` object
+    # The call returns a swagger_client.models.AccountResponse object
     # See https://www.exavault.com/developer/api-docs/#operation/getAccount for the details of the response object
     #
     # The AccountResponse object that we got back (`result`) is composed of additional, nested objects

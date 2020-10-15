@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     # We are demonstrating the use of the ResourcesApi, which can be used to
     # manage files and folders in your account
-
+    #
     # For this demo, we'll upload a file found in the same folder as this sample code.
     #
     # We are going to upload the file as a different name each time so that it is obvious that the file is being upload
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         #
         result = resources_api.upload_file(API_KEY, ACCESS_TOKEN, target_filename, target_size, file=filename)
 
-        # The uploadFile method of the ResourcesApi returns a .Swagger.Client.Model.ResourceResponse object
+        # The uploadFile method of the ResourcesApi returns a swagger_client.model.ResourceResponse object
         # See https://www.exavault.com/developer/api-docs/#operation/uploadFile
         # for the details of the response object
 
@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
         if size_uploaded != target_size:
             print(
-                "Uploaded file does not match expected size. Should be ##target_filename but is ##size_uploaded".format(
+                "Uploaded file does not match expected size. Should be {} but is {}".format(
                     target_size,
                     size_uploaded))
             sys.exit(3)

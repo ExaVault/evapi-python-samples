@@ -7,8 +7,8 @@ from swagger_client.api.resources_api import ResourcesApi
 from swagger_client.api.notifications_api import NotificationsApi
 
 ##
-# sample_get_account.py
-# Use the AccountApi to return your account info and check disk usage
+# sample_get_notification.py
+# Use the NotificationsApi to create a Notification on a folder
 ##
 
 # To use this script, add your credentials to a file named .env which is located in the same directory as the script
@@ -32,27 +32,18 @@ API_KEY = os.getenv('EV_KEY')
 ACCESS_TOKEN = os.getenv('EV_TOKEN')
 ACCOUNT_URL = os.getenv('ACCOUNT_URL')
 
-# We are demonstrating the use of the NotificationsApi, which can be used to manage notification settings
-#  for files and folders
-
-# For this demo, we'll create a new folder tree and add notifications to those new folders. If you have
-# an existing file or folder that you want to create a notification for, you won't need the step where
-# we use the ResourcesApi to create the folders first.
-#
-# We have to override the default configuration of the API object with an updated host URL so that our code
-#  will reach the correct URL for the api. We have to override this setting for each of the API classes we use
 
 if __name__ == "__main__":
     # We are demonstrating the use of the NotificationsApi, which can be used to manage notification settings
-    #  for files and folders
-
+    # for files and folders.
+    #
     # For this demo, we'll create a new folder tree and add notifications to those new folders. If you have
     # an existing file or folder that you want to create a notification for, you won't need the step where
     # we use the ResourcesApi to create the folders first.
     #
     # We have to override the default configuration of the API object with an updated host URL so that our code
-    # will reach the correct URL for the api. We have to override this setting
-    # for each of the API classes we use
+    # will reach the correct URL for the api. We have to override this setting for each of the API classes we use.
+
     resources_api = ResourcesApi()
     resources_api.api_client.configuration.host = ACCOUNT_URL
 
@@ -65,7 +56,7 @@ if __name__ == "__main__":
         upload_folder = "/{}/uploads".format(parent_folder)
         download_folder = "/{}/downloads".format(parent_folder)
 
-        # API methods that take a JSON body, such as the addFolder method, require us to submit an object with the
+        # API methods that take a JSON body, such as the add_folder method, require us to submit a dictionary with the
         # parameters we want to send to the API. This call requires a single parameter path
         request_body = {
             'path': upload_folder
@@ -83,19 +74,20 @@ if __name__ == "__main__":
         # Now we can add the second folder
         request_body = {'path': download_folder}
         result = resources_api.add_folder(API_KEY, ACCESS_TOKEN, body=request_body)
-        # The addFolder method of the ResourcesApi returns a swagger_client.model.ResourceResponse object
-        # See https://www.exavault.com/developer/api-docs/#operation/addFolder for
-        # the details of the response object
+
+        # The add_folder method of the ResourcesApi returns a swagger_client.model.ResourceResponse object
+        # See https://www.exavault.com/developer/api-docs/#operation/addFolder for the details of the
+        # response object
         print("Created new folder {}".format(result.data.attributes.path))
 
     except Exception as e:
         print('Exception when calling resources_api.add_folder: ', str(e))
         sys.exit(1)
 
-    # If we got this far without the program ending, we were able to set up our folders to create notifications,
-    # and now we can use the NotificationsApi to create those
-    # We have to override the default configuration of the API object with an updated host URL so that our code
-    #  will reach the correct URL for the api.
+    # If we got this far without the program ending, we were able to set up our folders to create 
+    # notifications, and now we can use the NotificationsApi to create those.
+    # We have to override the default configuration of the API object with an updated host URL so that 
+    # our code will reach the correct URL for the api.
 
     notifications_api = NotificationsApi()
     notifications_api.api_client.configuration.host = ACCOUNT_URL

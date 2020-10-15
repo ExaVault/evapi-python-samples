@@ -24,7 +24,7 @@ from swagger_client.api.resources_api import ResourcesApi
 #
 # Your account URL is determined by the name of your account.
 # The URL that you will use is https://accountname.exavault.com/api/v2/ replacing the "accountname" part with your
-#   account name
+# account name.
 # See https://www.exavault.com/developer/api-docs/#section/Introduction/The-API-URL
 ##
 
@@ -73,10 +73,9 @@ if __name__ == "__main__":
                 API_KEY, ACCESS_TOKEN, target_filename, target_size, file=filename)
 
             # We want to make an archive that contains the files we've uploaded
-            # The ResourcesApi::uploadFile method returns a .Swagger.Client.Model.ResourceResponse object
-            # The ResourceResponse::getData method will give us a Resource object
-            # The Resource::getId method will give us the resource ID of the newly uploaded file
-            # TODO: This is an array in PHP sample, verify
+            # The ResourcesApi.upload_file method returns a swagger_client.model.ResourceResponse object
+            # The ResourceResponse.data and ResourceResponse.id attributes will give us a Resource object and the 
+            # resource ID of the newly uploaded file respectively.
             compress_resources.append("id:{}".format(result.data.id))
         except Exception as e:
             print('Exception setting up files:', str(e))
@@ -89,7 +88,7 @@ if __name__ == "__main__":
     # Compressing files doesn't remove the files from the account
 
     try:
-        # We stored the resource IDs of all the files we want to compress into the compress_resources[] array
+        # We stored the resource IDs of all the files we want to compress into the compress_resources list.
 
         # API methods that take a JSON body, such as the compressFiles method, require us to submit an object with the
         # parameters we want to send to the API.
@@ -103,7 +102,7 @@ if __name__ == "__main__":
         }
         result = resources_api.compress_files(API_KEY, ACCESS_TOKEN, body=request_body)
 
-        # The ResourcesApi::compressFiles method returns a .Swagger.Client.Model.ResourceResponse object
+        # The ResourcesApi.compress_files method returns a swagger_client.model.ResourceResponse object
         print("Created archive at {}".format(result.data.attributes.path))
 
     except Exception as e:

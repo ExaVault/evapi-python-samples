@@ -1,45 +1,41 @@
 # evapi-python
 
 ## Introduction
-Welcome to ExaVault's Python code library for our v2 API. Our v2 API will allow you to interact with all aspects of the service the same way our web portal would. Included here is:
-- The Python code library itself. The library is generated from our API's [public swagger YAML file](https://www.exavault.com/api/docs/evapi_2.0_public.yaml)
-- Sample code showing how to use the library
-- Scripts for numerous basic actions such as uploading and downloading files
+Welcome to the sample code for ExaVault's Python code library, which demonstrates how to use various aspects of our API with your ExaVault account. The Python code library is available as a pypi package and [on Github](https://github.com/ExaVault/evapi-python). The library is generated from our API's [public swagger YAML file](https://www.exavault.com/api/docs/evapi_2.0_public.yaml)
 
 ## Requirements
 
-To use this library, you'll need Python 3.x installed along with the Python package installer [pip](https://pip.pypa.io/en/stable/). 
+To use this library, you'll need Python 2.7 or above installed along with the Python package installer [pip](https://pip.pypa.io/en/stable/). 
 
 ## Installing the Code Library
 
-### Option 0 - Using
+### Option 1 - Using the latest released pypi package
+// TODO: Verify after publishing the package
+ ```bash
+ % pip install evapi-python
+ ```
 
- 
+### Option 2 - Installation from the Github repo
 
-### Option 1 - Using pip locally
-You can use pip to add this library to your project by running this command in your project folder:
+You can use pip to install the code directory from the [Github reoi](https://github.com/ExaVault/evapi-python)] by running the following command,
 
 ```bash
-% pip install -e .
+% pip install https://github.com/ExaVault/evapi-python/archive/master.zip
 ```
-
-
-### Option 2 - Manual Installation
-Alternatively, you can clone the [github repo](https://github.com/ExaVault/evapi-python).
-
 
 
 ## Running Your First Sample
+
 **Step 1 - Install dependencies** 
 
-To get started, navigate into the folder containing this code library and run pip install:
+To get started, navigate into the folder containing this code and run pip install:
 
 ```bash 
-% cd path-to-this-library
+% cd path-to-this-repository
 % pip install -r requirements.txt
 ```
 
-This will install all the dependencies you need to run the sampples.
+This will install all the dependencies you need to run the samples.
 
 **Step 2 - Get your API Credentials** 
 
@@ -101,19 +97,19 @@ sample_upload_files.py       | Upload a file to your account.<br />_\*uploads sa
 
 **Problem - ModuleNotFoundError**
 
-Please make sure you installed the client package (by running `pip install -e .`), and if you're trying out the sample scripts please make sure that you installed the other requirements (by running `pip install -r requirements.txt`).
+Please make sure you installed the client package (by running `pip install evapi-python`), and if you're trying out the sample scripts please make sure that you installed other requirements (by running `pip install -r requirements.txt`).
 
 
 **Problem - Missing the required parameter `ev_api_key`**
 
-This error indicates there is a problem with the environment file. Make sure you have a file named .env in the same directory as the samples, and that it contains your API key, access token, and your correct account name.
+This error indicates there is a problem with the environment file. Make sure you have a file named `.env` in the same directory as the samples, and that it contains your API key, access token, and your correct account name.
 
 **Problem - 401 Unauthorized Response**
 
-If running the sample script returns a 401 Unauthorized error like the one shown below, there is a problem with your API credentials. Double-check that the .env file exists and contains the correct values. If all else fails, you may need to log into the ExaVault web file manager and re-issue your access token.
+If running the sample script returns a 401 Unauthorized error like the one shown below, there is a problem with your API credentials. Double-check that the `.env` file exists and contains the correct values. If all else fails, you may need to log into the ExaVault web file manager and re-issue your access token.
 
 ```bash
-Exception when calling AccountApi->getAccount: [401] Client error: `GET https://exavaultsupport.exavault.com/api/v2/account` resulted in a `401 Unauthorized` response:
+Exception when calling AccountApi: [401] Client error: `GET https://exavaultsupport.exavault.com/api/v2/account` resulted in a `401 Unauthorized` response:
 {"responseStatus":401,"errors":[{"code":"ERROR_INVALID_CREDENTIALS","detail":"HTTP_UNAUTHORIZED"}]}
 ```
 
@@ -126,9 +122,8 @@ If you encounter any other issues running this sample code, you can contact ExaV
 
 When you're ready to write your own code, you can use our sample code as examples. You'll need to:
 
-1. Download our client library 
-1. Run `pip install -e` in the directory that contains our library
-1. Import the library in your scripts `TODO: add package name here`
+1. Install our code library using `pip install evapi-python`
+1. Import the library in your scripts
 1. (Optional) You can use the .env file just like our sample scripts do.
 1. Whenever you instantiate an Api object (ResourcesApi, UsersApi, etc.), override the configuration to point the code at the correct API URL:
 
@@ -139,10 +134,12 @@ accounts_api.api_client.configuration.host = ACCOUNT_URL
 ```
 
 ```py
-# similar for resources_api
+resources_api = swagger_client.api.account_api.ResourcesApi()
+resources_api.api_client.configuration.host = ACCOUNT_URL
 ```
 ```py
-# similar for users_api
+users_api = swagger_client.api.account_api.UsersApi()
+users_api.api_client.configuration.host = ACCOUNT_URL
 ```
 
 ## Author

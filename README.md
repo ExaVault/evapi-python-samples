@@ -10,14 +10,13 @@ To use this library, you'll need Python 2.7 or above installed along with the Py
 ## Installing the Code Library
 
 ### Option 1 - Using the latest released pypi package
-// TODO: Verify after publishing the package
  ```bash
- % pip install evapi-python
+ % pip install exavault
  ```
 
 ### Option 2 - Installation from the Github repo
 
-You can use pip to install the code directory from the [Github reoi](https://github.com/ExaVault/evapi-python)] by running the following command,
+You can use pip to install the code directory from the [Github repo](https://github.com/ExaVault/evapi-python)] by running the following command,
 
 ```bash
 % pip install https://github.com/ExaVault/evapi-python/archive/master.zip
@@ -97,7 +96,7 @@ sample_upload_files.py       | Upload a file to your account.<br />_\*uploads sa
 
 **Problem - ModuleNotFoundError**
 
-Please make sure you installed the client package (by running `pip install evapi-python`), and if you're trying out the sample scripts please make sure that you installed other requirements (by running `pip install -r requirements.txt`).
+Please make sure you installed the client package (by running `pip install exavault`), and if you're trying out the sample scripts please make sure that you installed other requirements (by running `pip install -r requirements.txt`).
 
 
 **Problem - Missing the required parameter `ev_api_key`**
@@ -122,8 +121,8 @@ If you encounter any other issues running this sample code, you can contact ExaV
 
 When you're ready to write your own code, you can use our sample code as examples. You'll need to:
 
-1. Install our code library using `pip install evapi-python`
-1. Import the library in your scripts
+1. Install our code library using `pip install exavault`
+1. Import the `exavalt` library in your scripts
 1. (Optional) You can use the .env file just like our sample scripts do.
 1. Whenever you instantiate an Api object (ResourcesApi, UsersApi, etc.), override the configuration to point the code at the correct API URL:
 

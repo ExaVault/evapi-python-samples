@@ -3,7 +3,7 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from swagger_client.api.activity_api import ActivityApi
+from exavault import ActivityApi
 
 
 ##

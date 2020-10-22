@@ -3,8 +3,8 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from swagger_client.api.resources_api import ResourcesApi
-from swagger_client.api.shares_api import SharesApi
+from exavault import ResourcesApi
+from exavault import SharesApi
 
 
 ##

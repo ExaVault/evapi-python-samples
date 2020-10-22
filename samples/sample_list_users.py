@@ -2,7 +2,7 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from swagger_client.api.users_api import UsersApi
+from exavault import UsersApi
 
 ##
 # sample_list_users.py - Use the UsersApi to create a report of account users

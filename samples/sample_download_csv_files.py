@@ -3,9 +3,7 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from swagger_client.api.resources_api import ResourcesApi
-
-# TODO: download_api not found
+from exavault import ResourcesApi
 
 ##
 # sample_download_csv_files.py

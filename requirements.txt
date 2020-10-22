@@ -1,2 +1,2 @@
 python-dotenv==0.14
-https://github.com/ExaVault/evapi-python/archive/dev-v2.0.zip
+exavault>=2.0.0

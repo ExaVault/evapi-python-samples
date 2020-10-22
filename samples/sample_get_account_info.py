@@ -2,7 +2,7 @@ from __future__ import division
 import os
 import sys
 
-from swagger_client.api.account_api import AccountApi
+from exavault import AccountApi
 from dotenv import load_dotenv
 
 

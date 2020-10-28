@@ -7,21 +7,9 @@ Welcome to the sample code for ExaVault's Python code library, which demonstrate
 
 To use this library, you'll need Python 2.7 or above installed along with the Python package installer [pip](https://pip.pypa.io/en/stable/). 
 
-## Installing the Code Library
+You will also need an ExaVault account as well as and an API key and access token.
 
-### Option 1 - Using the latest released pypi package
- ```bash
- % pip install exavault
- ```
-
-### Option 2 - Installation from the Github repo
-
-You can use pip to install the code directory from the [Github repo](https://github.com/ExaVault/evapi-python)] by running the following command,
-
-```bash
-% pip install https://github.com/ExaVault/evapi-python/archive/master.zip
-```
-
+Some of the sample scripts will assume your account contains the **ExaVault Quick Start.pdf** file and the **Sample Files and Folders** folder, which come pre-loaded with a new account. You may need to make changes to `sample_upload_files.php` and `sample_download_csv_files.php` if those files are not present.
 
 ## Running Your First Sample
 
@@ -30,7 +18,6 @@ You can use pip to install the code directory from the [Github repo](https://git
 To get started, navigate into the folder containing this code and run pip install:
 
 ```bash 
-% cd path-to-this-repository
 % pip install -r requirements.txt
 ```
 
@@ -38,7 +25,7 @@ This will install all the dependencies you need to run the samples.
 
 **Step 2 - Get your API Credentials** 
 
-The next step is to generate an API key and token from your ExaVault account. You'll need to log into the ExaVault web file manager, as an admin-level user, to get the API key and access token. See [our API reference documentation](https://www.exavault.com/developer/api-docs/v2/#section/Obtaining-Your-API-Key-and-Access-Token) for the step-by-step guide to create your key and/or token.  
+The next step is to generate an API key and token from your ExaVault account. You'll need to log into the ExaVault web file manager, as an admin-level user, to get the API key and access token. See [our API reference documentation](https://www.exavault.com/developer/api-docs/v2/#section/Obtaining-Your-API-Key-and-Access-Token) for the step-by-step guide to create your key and token.  
 
 If you are not an admin-level user of an ExaVault account, you'll need someone with admin-level access to follow the steps and give you the API key and access token.
 
@@ -74,19 +61,18 @@ Account used: 40GB (11.4%)
 Total size: 350GB
 ```
 
-**Running Other Sample Files**
+## Running Other Sample Files
 
-There are several other sample files that you can now run. You won't need to repeat the steps to set up the .env file each time - the same environment information is used for all
-of the sample scripts. Some of the sample scripts will make changes to your account (uploading, creating shares or notifications, etc). Those are marked with an asterisk below:
-
+There are several other sample files that you can now run. You won't need to repeat the steps to set up the .env file each time - the same environment information is used for all of the sample scripts.
+Some of the sample scripts will make changes to your account (uploading, creating shares or notifications, etc). Those are marked with an asterisk below:
 
 Script                        | Purpose    \*=Makes changes to your account when run                                   | APIs Used                      |
 ------------------------------|----------------------------------------------------------------------------------------|--------------------------------|
+sample_get_account_info.py   | List the amount of available space for your account                                    | AccountApi                     |
 sample_add_notifications.py  | Add upload and download notifications<br/>_\*adds folders to your account_             | ResourcesApi, NotificationsApi |
 sample_add_user.py           | Add a new user with a home directory <br/>_\*adds a user and a folder to your account_ | UsersApi                       |
 sample_compress_files.py     | Compress several files into a zip file <br/>_\*adds files and folders to your account_ | ResourcesApi                   |
 sample_download_csv_files.py | Search for files matching a certain extension, then download them.                     | ResourcesApi                   |
-sample_get_account_info.py   | List the amount of available space for your account                                    | AccountApi                     |
 sample_get_failed_logins.py  | List usernames who had a failed login in the last 24 hours                             | ActivityApi                    |
 sample_list_users.py         | Generate a report of users in your account                                             | UsersApi                       |
 sample_shared_folder.py      | Create a new shared folder with a password<br />_\*adds a folder to your account_      | ResourcesApi, SharesApi        |
@@ -114,32 +100,11 @@ Exception when calling AccountApi: [401] Client error: `GET https://exavaultsupp
 
 **Other problems with sample code**
 
-If you encounter any other issues running this sample code, you can contact ExaVault support for help at support@exavault.com.
+If you encounter any other issues running this sample code, you can contact ExaVault Support at support@exavault.com.
 
+## Next Steps
 
-## Writing Your Own Code 
-
-When you're ready to write your own code, you can use our sample code as examples. You'll need to:
-
-1. Install our code library using `pip install exavault`
-1. Import the `exavalt` library in your scripts
-1. (Optional) You can use the .env file just like our sample scripts do.
-1. Whenever you instantiate an Api object (ResourcesApi, UsersApi, etc.), override the configuration to point the code at the correct API URL:
-
-```py
-ACCOUNT_URL = "https://YOUR_ACCOUNT_NAME_HERE.exavault.com/api/v2/";
-accounts_api = swagger_client.api.account_api.AccountApi()
-accounts_api.api_client.configuration.host = ACCOUNT_URL
-```
-
-```py
-resources_api = swagger_client.api.account_api.ResourcesApi()
-resources_api.api_client.configuration.host = ACCOUNT_URL
-```
-```py
-users_api = swagger_client.api.account_api.UsersApi()
-users_api.api_client.configuration.host = ACCOUNT_URL
-```
+To get started writing your own code, you may either modify our samples, or download and install our library into your existing project via pip. For details, see the [ExaVault Python API Library repo](https://github.com/ExaVault/evapi-python).
 
 ## Author
 

@@ -56,7 +56,7 @@ Now you're ready to run your first sample. Try sample_get_account_info first
 If everything worked, the sample code will run and connect to your account. You'll see output similar to this:
 
 ```bash
-% python sample_get_account_info.pys
+% python sample_get_account_info.py
 Account used: 40GB (11.4%)
 Total size: 350GB
 ```

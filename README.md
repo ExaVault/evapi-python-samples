@@ -31,7 +31,7 @@ If you are not an admin-level user of an ExaVault account, you'll need someone w
 
 **Step 3 - Add Your API Credentials to the sample code**
 
-Before you can make an API call, you'll need to edit the environment file provided with this code library. In that same directory where you ran `pip install -e .` above, do:
+Before you can make an API call, you'll need to edit the environment file provided with this code library. In that same directory where you ran `pip install` above, do:
 
 ```bash
 % cd samples

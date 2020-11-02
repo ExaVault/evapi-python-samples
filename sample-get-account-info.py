@@ -46,7 +46,7 @@ if __name__ == "__main__":
         # See https://www.exavault.com/developer/api-docs/#operation/getAccount for the details of this method
         # We must pass in our API Key and Access Token with every call, which we
         # retrieved from the .env file above
-        result = api.get_account(API_KEY, ACCESS_TOKEN)
+        result = api.get_account(API_KEY, ACCESS_TOKEN, include='masterUser')
     except Exception as e:
         # If there was a problem, such as our credentials not being correct, or the URL not working,
         # there will be an exception thrown
@@ -66,3 +66,7 @@ if __name__ == "__main__":
     print('Account used: {:.1f} GB ({:.1f}%)'.format(
         account_current_size, account_current_size / account_max_size * 100))
     print('Total size: {:.1f} GB'.format(account_max_size))
+
+    for included in result.included:
+        if included.type == 'user':
+            print('Primary Email Address: {}'.format(included.attributes.email))

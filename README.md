@@ -58,6 +58,7 @@ If everything worked, the sample code will run and connect to your account. You'
 % python sample-get-account-info.py
 Account used: 40GB (11.4%)
 Total size: 350GB
+Primary Email Address: tim@apple.com
 ```
 
 ## Running Other Sample Files

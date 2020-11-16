@@ -4,6 +4,7 @@ import sys
 
 from dotenv import load_dotenv
 from exavault import ResourcesApi
+from exavault.models.compress_files_request_body import CompressFilesRequestBody
 
 ##
 # sample_compress_files.py - Use the Resources API to compress files
@@ -95,11 +96,11 @@ if __name__ == "__main__":
         # See https://www.exavault.com/developer/api-docs/#operation/compressFiles for the request body schema
         #
         # This will overwrite an existing zip file with a new one
-        request_body = {
-            "resources": compress_resources,
-            "parentResource": "/",
-            "archiveName": "zipped_files.zip"
-        }
+        request_body = CompressFilesRequestBody(
+            resources=compress_resources,
+            parent_resource='/',
+            archive_name='zipped_files.zip',
+        )
         result = resources_api.compress_files(API_KEY, ACCESS_TOKEN, body=request_body)
 
         # The ResourcesApi.compress_files method returns a swagger_client.model.ResourceResponse object

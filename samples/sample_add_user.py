@@ -4,6 +4,8 @@ import sys
 
 from dotenv import load_dotenv
 from exavault import UsersApi
+from exavault.models.add_user_request_body import AddUserRequestBody
+from exavault.models.users_permissions import UsersPermissions
 
 ##
 # sample_add_user.py - Use the UsersApi to create a new user with a home directory
@@ -50,17 +52,29 @@ if __name__ == "__main__":
         # We're going to use our API Key as the username because usernames must be unique
         # You can change values below to make new users if you have run the script to create your sample user
         new_username = "{}-{}".format(API_KEY, datetime.datetime.today().strftime("%s"))
-        request_body = {
-            "username": new_username,
-            "homeResource": "/Home directory for api users",
-            "email": "test@example.com",
-            "password": "99drowssaP",
-            "role": "user",
-            "permissions": "download,upload,modify,list,changePassword,share,notification,delete",
-            "timeZone": "UTC",
-            "nickname": "created via the API",
-            "welcomeEmail": True,
-        }
+
+        request_body = AddUserRequestBody(
+            username=new_username,
+            home_resource='/Home directory for api users',
+            email='test@example.com',
+            password='99drowssaP',
+            role='user',
+            permissions=UsersPermissions(
+                download=True,
+                upload=True,
+                modify=True,
+                delete=True,
+                list=True,
+                change_password=True,
+                share=True,
+                notification=True,
+                view_form_data=True,
+                delete_form_data=True
+            ),
+            time_zone='UTC',
+            nickname='created via the API',
+            welcome_email=True
+        )
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = users_api.add_user(API_KEY, ACCESS_TOKEN, body=request_body)

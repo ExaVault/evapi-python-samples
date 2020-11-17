@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     # We are uploading a sample file provided along with this script.
     # It will have a different name in the account each time it is uploaded
-    filename = os.path.join(os.path.dirname(__file__), "files/ExaVault Quick Start.pdf")
+    filename = os.path.join(os.path.dirname(__file__), "files/dog.jpg")
 
     target_size = os.path.getsize(filename)
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     for i in range(6):
         # We're  uploading the same file under different names to make sure we
         # have multiple files in our target folder
-        target_filename = "/{}/quick start {}.pdf".format(parent_folder, i)
+        target_filename = "/{}/dog {}.jpg".format(parent_folder, i)
         try:
 
             # The uploadFile method of the ResourcesApi class will let us upload a file to our account

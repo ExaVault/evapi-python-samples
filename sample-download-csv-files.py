@@ -96,7 +96,7 @@ if __name__ == "__main__":
         with open(download_file, 'wb') as f:
             f.write(result)
 
-        print("File(s) downloaded to", download_file)
+        print("File(s) downloaded to", os.path.abspath(download_file))
 
     except Exception as e:
         print('Exception when calling Api:', str(e))

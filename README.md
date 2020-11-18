@@ -1,15 +1,16 @@
 # ExaVault Python API Sample Code - v2 API
 
 ## Introduction
-Welcome to the sample code for ExaVault's Python code library, which demonstrates how to use various aspects of our API with your ExaVault account. The Python code library is available as a pypi package and [on Github](https://github.com/ExaVault/evapi-python). The library is generated from our API's [public swagger YAML file](https://www.exavault.com/api/docs/evapi_2.0_public.yaml)
+
+Welcome to the sample code for ExaVault's Python code library, which demonstrates how to use various aspects of our API with your ExaVault account. The Python code library is available as a pypi package and [on Github](https://github.com/ExaVault/evapi-python). The library is generated from our API's [public swagger YAML file](https://www.exavault.com/api/docs/evapi_2.0_public.yaml).
 
 ## Requirements
 
-To use this library, you'll need Python 2.7 or above installed along with the Python package installer [pip](https://pip.pypa.io/en/stable/). 
+To run these scripts, you'll need Python 2.7 or above installed along with the Python package installer [pip](https://pip.pypa.io/en/stable/). 
 
 You will also need an ExaVault account as well as and an API key and access token.
 
-Some of the sample scripts will assume your account contains the **ExaVault Quick Start.pdf** file and the **Sample Files and Folders** folder, which come pre-loaded with a new account. You may need to make changes to `sample_upload_files.php` and `sample_download_csv_files.php` if those files are not present.
+Some of the sample scripts will assume your account contains the **Sample Files and Folders** folder, which come pre-loaded with a new account. You may need to make changes to `sample-download-csv-files.py` if that folder is not present.
 
 ## Running Your First Sample
 
@@ -34,10 +35,8 @@ If you are not an admin-level user of an ExaVault account, you'll need someone w
 Before you can make an API call, you'll need to edit the environment file provided with this code library. In that same directory where you ran `pip install` above, do:
 
 ```bash
-% cd samples
 % cp .env.example .env
 ```
-
 Edit the .env file you just created.
 
 - replace **your\_key\_here** with your API key. Don't add any extra spaces or punctuation
@@ -51,14 +50,15 @@ And save the file.
 Now you're ready to run your first sample. Try sample_get_account_info first
 
 ```bash
-% python sample_get_account_info.py
+% python sample-get-account-info.py
 ```
 If everything worked, the sample code will run and connect to your account. You'll see output similar to this:
 
 ```bash
-% python sample_get_account_info.py
+% python sample-get-account-info.py
 Account used: 40GB (11.4%)
 Total size: 350GB
+Primary Email Address: tim@apple.com
 ```
 
 ## Running Other Sample Files
@@ -66,24 +66,23 @@ Total size: 350GB
 There are several other sample files that you can now run. You won't need to repeat the steps to set up the .env file each time - the same environment information is used for all of the sample scripts.
 Some of the sample scripts will make changes to your account (uploading, creating shares or notifications, etc). Those are marked with an asterisk below:
 
-Script                        | Purpose    \*=Makes changes to your account when run                                   | APIs Used                      |
+Script                        | Purpose                                                                                | APIs Used                      |
 ------------------------------|----------------------------------------------------------------------------------------|--------------------------------|
-sample_get_account_info.py   | List the amount of available space for your account                                    | AccountApi                     |
-sample_add_notifications.py  | Add upload and download notifications<br/>_\*adds folders to your account_             | ResourcesApi, NotificationsApi |
-sample_add_user.py           | Add a new user with a home directory <br/>_\*adds a user and a folder to your account_ | UsersApi                       |
-sample_compress_files.py     | Compress several files into a zip file <br/>_\*adds files and folders to your account_ | ResourcesApi                   |
-sample_download_csv_files.py | Search for files matching a certain extension, then download them.                     | ResourcesApi                   |
-sample_get_failed_logins.py  | List usernames who had a failed login in the last 24 hours                             | ActivityApi                    |
-sample_list_users.py         | Generate a report of users in your account                                             | UsersApi                       |
-sample_shared_folder.py      | Create a new shared folder with a password<br />_\*adds a folder to your account_      | ResourcesApi, SharesApi        |
-sample_upload_files.py       | Upload a file to your account.<br />_\*uploads sample PDFS to your account_            | ResourcesApi                   |
+sample-get-account-info.py   | List the amount of available space for your account                                    | AccountApi                     |
+sample-add-notifications.py  | Add upload and download notifications<br/>_\*adds folders to your account_             | ResourcesApi, NotificationsApi |
+sample-add-user.py           | Add a new user with a home directory <br/>_\*adds a user and a folder to your account_ | UsersApi                       |
+sample-compress-files.py     | Compress several files into a zip file <br/>_\*adds files and folders to your account_ | ResourcesApi                   |
+sample-download-csv-files.py | Search for files matching a certain extension, then download them.                     | ResourcesApi                   |
+sample-get-failed-logins.py  | List usernames who had a failed login in the last 24 hours                             | ActivityApi                    |
+sample-list-users.py         | Generate a report of users in your account                                             | UsersApi                       |
+sample-shared-folder.py      | Create a new shared folder with a password<br />_\*adds a folder to your account_      | ResourcesApi, SharesApi        |
+sample-upload-files.py       | Upload a file to your account.<br />_\*uploads sample jpgs to your account_            | ResourcesApi                   |
 
 ## If Something Goes Wrong
 
 **Problem - ModuleNotFoundError**
 
 Please make sure you installed the client package (by running `pip install exavault`), and if you're trying out the sample scripts please make sure that you installed other requirements (by running `pip install -r requirements.txt`).
-
 
 **Problem - Missing the required parameter `ev_api_key`**
 

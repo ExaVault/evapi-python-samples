@@ -5,8 +5,9 @@ import sys
 from dotenv import load_dotenv
 from exavault import ResourcesApi
 from exavault import SharesApi
-from exavault.models.add_folder_request_body import AddFolderRequestBody
-from exavault.models.add_share_request_body import AddShareRequestBody
+from exavault.models import AddFolderRequestBody
+from exavault.models import AddShareRequestBody
+from exavault.models import AccessMode
 
 
 ##
@@ -96,8 +97,13 @@ if __name__ == "__main__":
         request_body = AddShareRequestBody(
             type='shared_folder',
             name='share',
-            access_mode=['download', 'upload'],
             resources=[folder_path],
+            access_mode=AccessMode(
+                download=True,
+                upload=True,
+                modify=False,
+                delete=False
+            ),
             password='99drowssaP?'
         )
 

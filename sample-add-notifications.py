@@ -5,6 +5,8 @@ import sys
 from dotenv import load_dotenv
 from exavault import ResourcesApi
 from exavault import NotificationsApi
+from exavault.models.add_folder_request_body import AddFolderRequestBody
+from exavault.models.add_notification_request_body import AddNotificationRequestBody
 
 ##
 # sample_get_notification.py
@@ -58,9 +60,8 @@ if __name__ == "__main__":
 
         # API methods that take a JSON body, such as the add_folder method, require us to submit a dictionary with the
         # parameters we want to send to the API. This call requires a single parameter path
-        request_body = {
-            'path': upload_folder
-        }
+
+        request_body = AddFolderRequestBody(path=upload_folder)
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = resources_api.add_folder(API_KEY, ACCESS_TOKEN, body=request_body)
@@ -104,13 +105,14 @@ if __name__ == "__main__":
         # - We could also have pulled the ID for the new folder out of the ResourceResponse object and used that
         #   as a resource identifier here. For example, if the ID of the downloads folder is 23422, we could pass
         #   id:23422 in the resource parameter of this call.
-        request_body = {
-            'type': 'folder',
-            'resource': download_folder,
-            'action': 'download',
-            'usernames': ['notice_user_all'],
-            'sendEmail': True
-        }
+
+        request_body = AddNotificationRequestBody(
+            type='folder',
+            resource=download_folder,
+            action='download',
+            usernames=['notice_user_all'],
+            send_email=True
+        )
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = notifications_api.add_notification(API_KEY, ACCESS_TOKEN, body=request_body)
@@ -127,19 +129,16 @@ if __name__ == "__main__":
         #   constants that can be used in the usernames array
         #   - We are sending the notification to a bunch of email addresses, rather than just our own
         #   - We have added an optional custom message to be included in each notification email
-        request_body = {
-            'type': 'folder',
-            'resource': upload_folder,
-            'action': 'upload',
-            'usernames': ['notice_user_all_users'],
-            'sendEmail': True,
-            'recipients': [
-                'sally@example.com',
-                'sidharth@example.com',
-                'lgomez@example.com'
-            ],
-            'message': 'Files have been uploaded into the main folder for you.'
-        }
+
+        request_body = AddNotificationRequestBody(
+            type='folder',
+            resource=upload_folder,
+            action='upload',
+            usernames=['notice_user_all_users'],
+            send_email=True,
+            recipients=['sally@example.com', 'sidharth@example.com', 'lgomez@example.com'],
+            message='Files have been uploaded into the main folder for you.',
+        )
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = notifications_api.add_notification(API_KEY, ACCESS_TOKEN, body=request_body)

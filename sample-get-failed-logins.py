@@ -57,8 +57,7 @@ if __name__ == "__main__":
 
         list_result = activity_api.get_session_logs(
             API_KEY, ACCESS_TOKEN, start_date=start_date, end_date=end_date,
-            ip_address=None, user_name=None, path=None, type='pass', offset=0,
-            limit=200, sort="-date"
+            type='pass', offset=0, limit=200, sort="-date"
         )
 
     except Exception as e:
@@ -97,4 +96,3 @@ if __name__ == "__main__":
 
     for user, failed_count in failed_logins.items():
         print("{0: <35} {1}".format(user, failed_count))
-        print(user, failed_count)

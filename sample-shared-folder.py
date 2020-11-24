@@ -5,6 +5,9 @@ import sys
 from dotenv import load_dotenv
 from exavault import ResourcesApi
 from exavault import SharesApi
+from exavault.models import AddFolderRequestBody
+from exavault.models import AddShareRequestBody
+from exavault.models import AccessMode
 
 
 ##
@@ -57,7 +60,7 @@ if __name__ == "__main__":
 
         # API methods that take a JSON body, such as the add_folder method, require us to submit an object with the
         # parameters we want to send to the API. This call requires a single parameter path
-        request_body = {'path': folder_path}
+        request_body = AddFolderRequestBody(path=folder_path)
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = resources_api.add_folder(API_KEY, ACCESS_TOKEN, body=request_body)
@@ -91,19 +94,18 @@ if __name__ == "__main__":
         # - We could also have pulled the ID for the new folder out of the ResourceResponse object and used that
         #   as a resource identifier here. For example, if the ID of the new folder is 23422, we could pass
         #   id:23422 in the resource parameter of this call.
-        request_body = {
-            'type': 'shared_folder',
-            'name': 'share',
-            'access_mode': [
-                'download',
-                'upload'
-            ],
-            'resources': [
-                folder_path
-            ],
-            'action': 'download',
-            'password': '99drowssaP?'
-        }
+        request_body = AddShareRequestBody(
+            type='shared_folder',
+            name='share',
+            resources=[folder_path],
+            access_mode=AccessMode(
+                download=True,
+                upload=True,
+                modify=False,
+                delete=False
+            ),
+            password='99drowssaP?'
+        )
 
         # We have to pass the API_KEY and ACCESS_TOKEN with every API call.
         result = shares_api.add_share(API_KEY, ACCESS_TOKEN, body=request_body)

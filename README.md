@@ -19,7 +19,7 @@ Some of the sample scripts will assume your account contains the **Sample Files 
 To get started, navigate into the folder containing this code and run pip install:
 
 ```bash 
-% pip install -r requirements.txt
+% pip install -r requirements.txt -U
 ```
 
 This will install all the dependencies you need to run the samples.

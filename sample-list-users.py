@@ -116,7 +116,7 @@ if __name__ == "__main__":
             username = user.attributes.username
             nickname = user.attributes.nickname
             email = user.attributes.email
-            home_dir = user.attributes.home_dir
+            home_path = user.attributes.home_path
             role = user.attributes.role
             time_zone = user.attributes.time_zone
             created = user.attributes.created
@@ -150,7 +150,7 @@ if __name__ == "__main__":
                 username,
                 nickname,
                 email,
-                home_dir,
+                home_path,
                 role,
                 time_zone,
                 download,

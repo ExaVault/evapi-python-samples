@@ -52,7 +52,7 @@ if __name__ == "__main__":
     try:
         # We will create a new folder tree for the demo. The top-level folder will
         # have a different name each time you run this script
-        parent_folder = "sample_notifications_{}".format(datetime.datetime.today().strftime("%s"))
+        parent_folder = "sample_notifications_{}".format(datetime.datetime.today().strftime("%Y%m%d_%H%M%S"))
 
         # We can actually be sneaky and add missing parent folders by passing a multi-level path
         upload_folder = "/{}/uploads".format(parent_folder)

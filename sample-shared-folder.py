@@ -56,7 +56,7 @@ if __name__ == "__main__":
     try:
         # We will create a new folder for the demo. The folder will have a
         # different name each time you run this script
-        folder_path = "/sample_share_{}".format(datetime.datetime.today().strftime("%s"))
+        folder_path = "/sample_share_{}".format(datetime.datetime.today().strftime("%Y%m%d_%H%M%S"))
 
         # API methods that take a JSON body, such as the add_folder method, require us to submit an object with the
         # parameters we want to send to the API. This call requires a single parameter path

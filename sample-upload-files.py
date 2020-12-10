@@ -56,7 +56,7 @@ if __name__ == "__main__":
         # It will have a different name in the account each time it is uploaded
         filename = os.path.join(
             os.path.dirname(__file__), "files/dog.jpg")
-        target_filename = 'dog{}.jpg'.format(datetime.datetime.today().strftime("%s"))
+        target_filename = 'dog_{}.jpg'.format(datetime.datetime.today().strftime("%Y%m%d_%H%M%S"))
         target_size = os.path.getsize(filename)
 
         # The uploadFile method of the ResourcesApi class will let us upload a file to our account

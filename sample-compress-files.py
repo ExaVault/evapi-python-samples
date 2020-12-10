@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     # We will create a new folder tree for the demo. The top-level folder will
     # have a different name each time you run this script
-    parent_folder = "sample_compress_{}".format(datetime.datetime.today().strftime("%s"))
+    parent_folder = "sample_compress_{}".format(datetime.datetime.today().strftime("%Y%m%d_%H%M%S"))
 
     # We are uploading a sample file provided along with this script.
     # It will have a different name in the account each time it is uploaded

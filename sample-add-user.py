@@ -51,7 +51,7 @@ if __name__ == "__main__":
         #
         # We're going to use our API Key as the username because usernames must be unique
         # You can change values below to make new users if you have run the script to create your sample user
-        new_username = "{}-{}".format(API_KEY, datetime.datetime.today().strftime("%s"))
+        new_username = "{}-{}".format(API_KEY, datetime.datetime.today().strftime("%Y%m%d_%H%M%S"))
 
         request_body = AddUserRequestBody(
             username=new_username,
